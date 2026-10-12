@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kegiatan Ekstrakurikuler - SMP Negeri 1 Kandat</title>
+    
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                            deep: '#1e1b4b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Subtle Background Grid Pattern matching image aesthetics */
+        .bg-grid-pattern {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#cbd5e1 0.8px, transparent 0.8px);
+            background-size: 18px 18px;
+        }
+
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Badge Glow & Hover */
+        .badge-hover-effect {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .badge-hover-effect:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -6px rgba(79, 70, 229, 0.15);
+        }
+
+        /* Smooth View Transitions */
+        .page-fade-in {
+            animation: fadeIn 0.35s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 bg-grid-pattern antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo & Brand Name -->
+                <a href="#home" onclick="navigateTo('home')" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
+                        <i class="fa-solid me-0 fa-graduation-cap text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-slate-900 text-base sm:text-lg tracking-tight block leading-tight">SMPN 1 KANDAT</span>
+                        <span class="text-xs font-medium text-brand-600 block">Portal Ekstrakurikuler</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center space-x-1 text-sm font-medium">
+                    <button onclick="navigateTo('home')" class="px-3 py-2 rounded-lg text-slate-600 hover:text-brand-600 hover:bg-slate-50 transition">Beranda</button>
+                    <button onclick="navigateTo('home')" class="px-3 py-2 rounded-lg text-brand-700 bg-brand-50 font-semibold transition">Ekstrakurikuler</button>
+                    <a href="https://smpnegeri1kandat.sch.id" target="_blank" rel="noopener" class="px-3 py-2 rounded-lg text-slate-600 hover:text-brand-600 hover:bg-slate-50 transition flex items-center gap-1.5">
+                        <span>Website Utama</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-70"></i>
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="p-2 rounded-lg text-slate-600 hover:bg-slate-100 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-4 space-y-1">
+            <button onclick="navigateTo('home'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 font-medium">Beranda</button>
+            <button onclick="navigateTo('home'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-brand-700 bg-brand-50 font-semibold">Ekstrakurikuler</button>
+            <a href="https://smpnegeri1kandat.sch.id" target="_blank" class="block w-full text-left px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-100 font-medium">Website Utama SMPN 1 Kandat</a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER (SPA ROUTER TARGET) -->
+    <main id="app-container" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        
+        <!-- SECTION 1: LIST VIEW (MAIN CATALOG PAGE) -->
+        <section id="list-view" class="page-fade-in space-y-8">
+            
+            <!-- Header Title Banner -->
+            <div class="space-y-3">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 text-brand-700 text-xs font-semibold tracking-wide uppercase">
+                    <i class="fa-solid fa-shapes text-xs"></i>
+                    <span>Kegiatan Ekstrakurikuler</span>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div>
+                        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                            Kegiatan Ekstrakurikuler
+                        </h1>
+                        <p class="mt-2 text-slate-600 text-base sm:text-lg max-w-2xl leading-relaxed">
+                            Wadah pengembangan minat, bakat, dan kreativitas siswa di luar kegiatan akademik SMP Negeri 1 Kandat.
+                        </p>
+                    </div>
+                    
+                    <a href="#home" onclick="showAllCards()" class="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 font-semibold text-sm hover:underline self-start md:self-auto">
+                        <span>Lihat Semua</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Search and Category Filter Bar -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-4">
+                <div class="flex flex-col md:flex-row gap-3">
+                    <!-- Search Input -->
+                    <div class="relative flex-grow">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input 
+                            type="text" 
+                            id="search-input" 
+                            placeholder="Cari ekstrakurikuler (contoh: Voli, PMR, Pramuka)..." 
+                            class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition"
+                            oninput="filterEkstra()"
+                        >
+                    </div>
+
+                    <!-- Category Pills -->
+                    <div class="flex flex-wrap items-center gap-1.5 overflow-x-auto pb-1 md:pb-0" id="category-filters">
+                        <!-- Dynamic Buttons inserted by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards Grid Container -->
+            <div id="ekstra-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Cards will be populated dynamically via JavaScript -->
+            </div>
+
+            <!-- Empty Search State -->
+            <div id="empty-state" class="hidden text-center py-16 bg-white rounded-2xl border border-dashed border-slate-300">
+                <div class="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-800">Ekstrakurikuler Tidak Ditemukan</h3>
+                <p class="text-slate-500 text-sm mt-1 max-w-md mx-auto">Coba gunakan kata kunci pencarian lain atau pilih kategori yang sesuai.</p>
+                <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-brand-600 text-white rounded-xl text-sm font-semibold hover:bg-brand-700 transition">Reset Filter</button>
+            </div>
+        </section>
+
+        <!-- SECTION 2: DETAIL VIEW (INDIVIDUAL EXTRACURRICULAR PAGE) -->
+        <section id="detail-view" class="hidden page-fade-in space-y-6">
+            
+            <!-- Breadcrumb Navigation -->
+            <nav class="flex items-center text-xs sm:text-sm text-slate-500 space-x-2 overflow-x-auto py-1">
+                <button onclick="navigateTo('home')" class="hover:text-brand-600 flex items-center gap-1 shrink-0">
+                    <i class="fa-solid fa-house text-xs"></i>
+                    <span>Home</span>
+                </button>
+                <span>/</span>
+                <span class="shrink-0">Profil Sekolah</span>
+                <span>/</span>
+                <button onclick="navigateTo('home')" class="hover:text-brand-600 shrink-0">Ekstrakurikuler</button>
+                <span>/</span>
+                <span id="detail-breadcrumb-title" class="text-brand-700 font-semibold truncate shrink-0">Detail Ekstra</span>
+            </nav>
+
+            <!-- Back Link & Title Header -->
+            <div class="space-y-2">
+                <button onclick="navigateTo('home')" class="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-brand-600 font-medium transition group mb-1">
+                    <i class="fa-solid fa-arrow-left text-xs group-hover:-translate-x-1 transition-transform"></i>
+                    <span>Kembali ke Daftar Ekstrakurikuler</span>
+                </button>
+
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-4">
+                    <div>
+                        <h1 id="detail-title" class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                            --
+                        </h1>
+                        <div class="flex items-center gap-3 mt-2">
+                            <span id="detail-badge-tag" class="px-3 py-0.5 rounded-full bg-brand-100 text-brand-700 text-xs font-bold uppercase tracking-wider">
+                                EKSTRAKURIKULER
+                            </span>
+                            <span class="text-xs text-slate-500 flex items-center gap-1.5">
+                                <i class="fa-regular fa-eye"></i>
+                                <span id="detail-views">13 kali</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2-Column Detail Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                
+                <!-- MAIN CONTENT COLUMN (Left - 2 Cols) -->
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <!-- Emblem / Banner Large Display Card -->
+                    <div class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-sm flex flex-col items-center justify-center text-center relative overflow-hidden">
+                        <div class="absolute -right-12 -top-12 w-40 h-40 bg-brand-50 rounded-full blur-2xl pointer-events-none"></div>
+                        <div class="absolute -left-12 -bottom-12 w-40 h-40 bg-purple-50 rounded-full blur-2xl pointer-events-none"></div>
+
+                        <!-- Emblem Icon / Frame -->
+                        <div id="detail-emblem-container" class="w-36 h-36 sm:w-44 sm:h-44 rounded-2xl bg-slate-50 p-4 flex items-center justify-center shadow-inner border border-slate-100 relative z-10 mb-4">
+                            <!-- Injected SVG / Logo -->
+                        </div>
+
+                        <h2 id="detail-emblem-caption" class="text-xl font-bold text-slate-800 z-10">
+                            Ekstrakurikuler Spensaka
+                        </h2>
+                        <p class="text-xs text-slate-500 mt-1 z-10">SMP Negeri 1 Kandat Kediri</p>
+                    </div>
+
+                    <!-- Overview & Description Card -->
+                    <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-4">
+                        <h3 id="detail-section-heading" class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-info text-brand-600 text-lg"></i>
+                            <span>Mengenal Ekstrakurikuler</span>
+                        </h3>
+                        
+                        <div id="detail-description" class="text-slate-600 leading-relaxed space-y-3 text-sm sm:text-base">
+                            <!-- Description content injected by JS -->
+                        </div>
+
+                        <hr class="border-slate-100 my-4">
+
+                        <!-- Objectives / Activities List -->
+                        <div class="space-y-3">
+                            <h4 class="font-bold text-slate-800 text-sm uppercase tracking-wider text-xs text-brand-700">Tujuan & Fokus Kegiatan</h4>
+                            <ul id="detail-highlights" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-700">
+                                <!-- Bullet points injected by JS -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Section -->
+                    <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-4">
+                        <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-camera-retro text-brand-600 text-lg"></i>
+                            <span>Galeri Kegiatan</span>
+                        </h3>
+                        <div id="detail-gallery" class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+                            <!-- Gallery items injected by JS -->
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- SIDEBAR COLUMN (Right - 1 Col) -->
+                <div class="space-y-6">
+                    
+                    <!-- Card 1: Schedule Info Card -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center text-lg font-semibold">
+                                <i class="fa-regular fa-clock"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-900 text-base">Jadwal Latihan</h3>
+                                <p class="text-xs text-slate-500">Rutin Setiap Minggu</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 space-y-2">
+                            <div id="detail-schedule-text" class="font-bold text-brand-700 text-base">
+                                --
+                            </div>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Diharapkan hadir tepat waktu sebelum sesi latihan/kegiatan dimulai di lokasi sekolah.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Interest / Registration Card -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm space-y-4">
+                        <h3 class="font-bold text-slate-900 text-base">Tertarik Bergabung?</h3>
+                        
+                        <div class="text-sm text-slate-600 space-y-2">
+                            <p>Hubungi pembina atau pendaftar online untuk mengkonfirmasi keanggotaan Anda:</p>
+                            <div class="flex items-center gap-2 font-semibold text-slate-800 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <i class="fa-solid fa-user-tie text-brand-600"></i>
+                                <span id="detail-coach">Pembina: --</span>
+                            </div>
+                        </div>
+
+                        <button onclick="openRegistrationModal()" class="w-full py-3 px-4 bg-brand-700 hover:bg-brand-800 text-white rounded-xl font-bold text-sm shadow-md shadow-brand-700/20 hover:shadow-lg transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Daftar Sekarang</span>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- REGISTRATION MODAL FORM -->
+    <div id="registration-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 relative space-y-4 page-fade-in">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-xs">
+                        <i class="fa-solid fa-file-pen"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-lg">Pendaftaran Ekstrakurikuler</h3>
+                </div>
+                <button onclick="closeRegistrationModal()" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Modal Form -->
+            <form id="reg-form" onsubmit="submitRegistration(event)" class="space-y-3.5">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Ekstrakurikuler Tujuan</label>
+                    <input type="text" id="form-target-ekstra" readonly class="w-full px-3 py-2 bg-slate-100 border border-slate-200 rounded-xl text-sm font-bold text-brand-700 focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Lengkap Siswa *</label>
+                    <input type="text" required id="form-name" placeholder="Masukkan nama siswa..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Kelas *</label>
+                        <select required id="form-class" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            <option value="">Pilih Kelas</option>
+                            <option value="7A">Kelas 7A</option>
+                            <option value="7B">Kelas 7B</option>
+                            <option value="7C">Kelas 7C</option>
+                            <option value="8A">Kelas 8A</option>
+                            <option value="8B">Kelas 8B</option>
+                            <option value="8C">Kelas 8C</option>
+                            <option value="9A">Kelas 9A</option>
+                            <option value="9B">Kelas 9B</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">No. WhatsApp / HP *</label>
+                        <input type="tel" required id="form-phone" placeholder="08xxxxxxxxxx" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Alasan Bergabung / Pengalaman</label>
+                    <textarea id="form-reason" rows="3" placeholder="Contoh: Ingin mengasah bakat dan mewakili sekolah..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+                </div>
+
+                <div class="pt-2 flex items-center justify-end gap-2">
+                    <button type="button" onclick="closeRegistrationModal()" class="px-4 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50">Batal</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-brand-700 hover:bg-brand-800 text-white text-xs font-bold shadow-md flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                        <span>Kirim via WhatsApp</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- FLOATING SCHOOL PORTAL BADGE (MATCHING SCREENSHOT) -->
+    <div id="floating-app-banner" class="fixed bottom-4 right-4 z-30 bg-white p-3 rounded-2xl shadow-xl border border-slate-200 flex items-center gap-3 max-w-sm transition-all duration-300">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-800 to-brand-600 flex items-center justify-center text-white shrink-0 shadow-md">
+            <i class="fa-solid fa-school text-sm"></i>
+        </div>
+        <div class="flex-grow min-w-0">
+            <p class="font-bold text-xs text-slate-900 truncate">SMPN 1 KANDAT</p>
+            <p class="text-[11px] text-slate-500 truncate">Sistem Informasi Ekstrakurikuler</p>
+        </div>
+        <a href="https://smpnegeri1kandat.sch.id" target="_blank" class="px-3 py-1.5 bg-brand-700 hover:bg-brand-800 text-white rounded-lg text-xs font-bold shrink-0 transition">
+            Situs Utama
+        </a>
+        <button onclick="document.getElementById('floating-app-banner').style.display='none'" class="text-slate-400 hover:text-slate-600 text-xs p-1">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 mt-12 py-8 text-center text-slate-500 text-xs">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p class="font-semibold text-slate-700">SMP Negeri 1 Kandat (Spensaka)</p>
+            <p>Jl. Raya Kandat No. 12, Kec. Kandat, Kab. Kediri, Jawa Timur</p>
+            <p class="text-slate-400 pt-2">© 2026 Portal Ekstrakurikuler Sekolah. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Comprehensive Dataset for Extracurricular Activities
+        const EKSTRA_DATA = [
+            {
+                id: 'voli',
+                name: 'Voli',
+                category: 'Olahraga',
+                schedule: 'Setiap Rabu Jam 14.30 - 16.00',
+                coach: 'Bapak Iwan Sudrajat, S.Pd.',
+                phoneCoach: '62 856-4623-0553',
+                shortDesc: 'Ekstrakurikuler bola voli adalah wadah pembinaan olahraga di sekolah yang bertujuan mengembangkan potensi, kebugaran fisik, serta keterampilan teknik bermain.',
+                fullDesc: `Ekstrakurikuler Bola Voli SMPN 1 Kandat merupakan salah satu cabang olahraga terfavorit yang secara konsisten melatih ketangkasan, stamina, dan kerja sama tim. Siswa dibekali dengan teknik dasar passing, service, smash, hingga strategi bertanding dalam turnamen antarsekolah tingkat kabupaten.`,
+                highlights: [
+                    'Latihan teknik dasar & taktik tim',
+                    'Penguatan fisik dan stamina siswa',
+                    'Persiapan Kejuaraan O2SN / Turnamen',
+                    'Pembentukan jiwa sportifitas & solidaritas'
+                ],
+                views: 142,
+                emblemColor: 'from-amber-400 to-blue-600',
+                icon: 'fa-solid fa-volleyball',
+                svgEmblem: `
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                        <polygon points="100,10 180,50 180,150 100,190 20,150 20,50" fill="#1e1b4b" stroke="#f59e0b" stroke-width="4"/>
+                        <circle cx="100" cy="100" r="45" fill="#3b82f6"/>
+                        <path d="M70,100 Q100,70 130,100 M100,55 L100,145 M75,80 Q100,120 125,80 M75,120 Q100,80 125,120" stroke="#ffffff" stroke-width="3" fill="none"/>
+                        <text x="100" y="172" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">VOLI SPENSAKA</text>
+                    </svg>
+                `,
+                gallery: [
+                    'https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80'
+                ]
+            },
+            {
+                id: 'pik-r',
+                name: 'PIK-R',
+                category: 'Organisasi & Keagamaan',
+                schedule: 'Setiap Selasa Jam 13.30 - Selesai',
+                coach: 'Ibu Rafitra Ferninda Putri, S.Pd.',
+                phoneCoach: '62 857-5506-6686',
+                shortDesc: 'Ekstrakurikuler Pusat Informasi dan Konseling Remaja (PIK-R) adalah wadah kegiatan di sekolah untuk pembentukan karakter remaja sebaya.',
+                fullDesc: `PIK-R (Pusat Informasi dan Konseling Remaja) SMPN 1 Kandat berfokus pada pendidikan sebaya, kesehatan reproduksi remaja, ketahanan remaja, perencanaan masa depan, serta pencegahan perundungan (anti-bullying) di lingkungan sekolah.`,
+                highlights: [
+                    'Pelatihan Konselor Sebaya',
+                    'Edukasi Kesehatan Remaja & Gizi',
+                    'Kampanye Anti Bullying & Narkoba',
+                    'Public Speaking & Discussion'
+                ],
+                views: 98,
+                emblemColor: 'from-pink-500 to-rose-600',
+                icon: 'fa-solid fa-users-rays',
+                svgEmblem: `
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                        <circle cx="100" cy="100" r="85" fill="#f43f5e" stroke="#ffffff" stroke-width="6"/>
+                        <circle cx="100" cy="100" r="70" fill="#ffffff"/>
+                        <path d="M100,50 L120,80 L150,80 L125,100 L135,130 L100,110 L65,130 L75,100 L50,80 L80,80 Z" fill="#fb7185"/>
+                        <circle cx="100" cy="95" r="18" fill="#e11d48"/>
+                        <text x="100" y="160" font-size="14" font-weight="extrabold" fill="#e11d48" text-anchor="middle">PIK-R SPENSAKA</text>
+                    </svg>
+                `,
+                gallery: [
+                    'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80'
+                ]
+            },
+            {
+                id: 'pramuka',
+                name: 'Pra-Spensaka (Pramuka)',
+                category: 'Organisasi & Keagamaan',
+                schedule: 'Setiap Sabtu Jam 12.00 - Selesai',
+                coach: 'Kak Wanda Setiawan & Kak Binti Ngafifatul Maidah',
+                phoneCoach: '62 856-4981-0819',
+                shortDesc: 'PRAMUKA SPENSAKA merupakan kegiatan ekstrakurikuler kepramukaan yang membina kedisiplinan, kepemimpinan, dan kemandirian.',
+                fullDesc: `Pramuka Pra-Spensaka adalah ekstrakurikuler pembinaan karakter yang membentuk kepribadian yang tangguh, cinta alam, berjiwa kepemimpinan, serta memiliki keterampilan kepramukaan seperti Morse, Semapor, pioneering, dan perkemahan bakti.`,
+                highlights: [
+                    'Latihan Keterampilan Kepramukaan (Pioneering, Morse)',
+                    'Perkemahan Sabtu Minggu (Persami)',
+                    'Lomba Tingkat Penggalang',
+                    'Penjelajahan & Bakti Sosial'
+                ],
+                views: 215,
+                emblemColor: 'from-amber-700 to-amber-900',
+                icon: 'fa-solid fa-compass',
+                svgEmblem: `
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                        <polygon points="100,15 175,60 175,140 100,185 25,140 25,60" fill="#78350f" stroke="#f59e0b" stroke-width="5"/>
+                        <circle cx="100" cy="95" r="40" fill="#b45309"/>
+                        <path d="M100,60 L110,90 L140,95 L115,115 L122,145 L100,125 L78,145 L85,115 L60,95 L90,90 Z" fill="#fef3c7"/>
+                        <text x="100" y="170" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">PRA-SPENSAKA</text>
+                    </svg>
+                `,
+                gallery: [
+                    'https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80'
+                ]
+            },
+            {
+                id: 'pmr',
+                name: 'PMR (Palang Merah Remaja)',
+                category: 'Organisasi & Keagamaan',
+                schedule: 'Setiap Kamis Jam 13.30 - Selesai',
+                coach: 'Ibu Ulul Azmiyah, S.Pd.',
+                phoneCoach: '2 857-3678-4701',
+                shortDesc: 'Dengan semangat "Berbakti dan Berani", PMR SMPN 1 Kandat mengajak setiap anggota menjadi remaja yang peduli kemanusiaan dan pertolongan pertama.',
+                fullDesc: `Palang Merah Remaja (PMR) melatih siswa dalam pertolongan pertama (PP), perawatan keluarga (PK), kesiapsiagaan bencana, serta Pola Hidup Bersih dan Sehat (PHBS). Anggota PMR siap bertugas dalam setiap upacara sekolah dan kegiatan sosial.`,
+                highlights: [
+                    'Pelatihan Pertolongan Pertama (PP)',
+                    'Perawatan Keluarga & Kesiapsiagaan Bencana',
+                    'Tugas Kesehatan Upacara Bendera',
+                    'Aksi Donor Darah & Kemanusiaan'
+                ],
+                views: 176,
+                emblemColor: 'from-red-500 to-rose-700',
+                icon: 'fa-solid fa-kit-medical',
+                svgEmblem: `
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                        <rect x="20" y="20" width="160" height="160" rx="35" fill="#ffffff" stroke="#e11d48" stroke-width="8"/>
+                        <path d="M85,50 H115 V85 H150 V115 H115 V150 H85 V115 H50 V85 H85 Z" fill="#e11d48"/>
+                        <text x="100" y="172" font-size="13" font-weight="extrabold" fill="#1e293b" text-anchor="middle">PMR SPENSAKA</text>
+                    </svg>
+                `,
+                gallery: [
+                    'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80'
+                ]
+            },
+            {
+                id: 'lenspensaka',
+                name: 'Lenspensaka (Jurnalistik & Fotografi)',
+                category: 'Seni & Budaya',
+                schedule: 'Setiap Selasa Jam 13.30 - Selesai',
+                coach: 'Bapak Kurnia Pangesti,S.Pd.',
+                phoneCoach: '62 895-3951-19376',
+                shortDesc: 'Dengan semangat "Abadikan Momen, Ceritakan Inspirasi", LENSPENSAKA mendorong siswa untuk menguasai dunia fotografi dan jurnalistik digital.',
+                fullDesc: `LENSPENSAKA adalah ekstrakurikuler media sekolah yang mengajarkan teknik dasar fotografi kamera & smartphone, videografi, pembuatan konten kreatif sekolah, penulisan berita web, serta desain grafis media sosial.`,
+                highlights: [
+                    'Teknik Dasar Fotografi & Kamera DSLR/HP',
+                    'Penulisan Berita & Jurnalistik Sekolah',
+                    'Editing Video & Desain Grafis',
+                    'Liputan Event & Acara Resmi Sekolah'
+                ],
+                views: 110,
+                emblemColor: 'from-sky-500 to-indigo-600',
+                icon: 'fa-solid fa-camera',
+                svgEmblem: `
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                        <rect x="20" y="30" width="160" height="140" rx="25" fill="#0284c7" stroke="#38bdf8" stroke-width="4"/>
+                        <circle cx="100" cy="100" r="40" fill="#0f172a" stroke="#ffffff" stroke-width="5"/>
+                        <circle cx="100" cy="100" r="22" fill="#38bdf8"/>
+                        <circle cx="145" cy="60" r="8" fill="#facc15"/>
+                        <text x="100" y="162" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">LENSPENSAKA</text>
+                    </svg>
+                `,
+                gallery: [
+                    'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=600&q=80'
+                ]
+            },
+            {
+                id: 'rebana',
+                name: 'Rebana & Hadrah',
+                category: 'Seni & Budaya',
+                schedule: 'Setiap Rabu Jam 14.00 - 15.30',
+                coach: 'Ust. M. Ilham',
+                phoneCoach: '62 859-3518-5128',
+                shortDesc: '"Melantunkan Syiar, Mengukir Prestasi" Rebana Spensaka adalah wadah pengembangan bakat seni musik islami dan spiritualitas.',
+                fullDesc: `Ekstrakurikuler Rebana & Hadrah SMPN 1 Kandat melatih seni musik bernuansa Islami. Siswa mempelajari Pukulan Terbang (Keprak, Bass, Banjari), vokal shalawat, serta harmoni panggung untuk penampilan peringatan hari besar Islam dan lomba seni.`,
+                highlights: [
+                    'Pukulan Variasi Hadrah Banjari',
+                    'Olah Vokal & Harmoni Shalawat',
+                    'Tampil di Acara Peringatan Hari Besar Islam (PHBI)',
+                    'Mengikuti Festival Seni Rebana Kabupaten'
+                ],
+                views: 89,
+                emblemColor: 'from-emerald-600 to-teal-800',
+                icon: 'fa-solid fa-drum',
+                svgEmblem: `
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                        <circle cx="100" cy="100" r="80" fill="#047857" stroke="#34d399" stroke-width="6"/>
+                        <circle cx="100" cy="100" r="62" fill="#fef3c7" stroke="#d97706" stroke-width="4"/>
+                        <path d="M100,55 L108,80 L135,80 L112,96 L120,122 L100,105 L80,122 L88,96 L65,80 L92,80 Z" fill="#059669"/>
+                        <text x="100" y="152" font-size="12" font-weight="bold" fill="#064e3b" text-anchor="middle">REBANA SPENSAKA</text>
+                    </svg>
+                `,
+                gallery: [
+                    'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80'
+                ]
+            },
+            {
+                id: 'futsal',
+                name: 'Futsal & Sepakbola',
+                category: 'Olahraga',
+                schedule: 'Setiap Jumat Jam 15.00 - 17.00',
+                coach: 'Coach Mr. Sunyoto',
+                phoneCoach: '62 857-3021-4817',
+                shortDesc: 'Wadah pengembangan bakat olah bola futsal yang melatih fisik, taktik tim, dan sportifitas dalam berolahraga.',
+                fullDesc: `Tim Futsal Spensaka secara intensif mengadakan latihan fisik, kontrol bola, strategi transisi penyerangan dan pertahanan, serta pertandingan persahabatan antar sekolah guna mempersiapkan turnamen Liga Futsal SMP.`,
+                highlights: [
+                    'Latihan Formasi & Taktik Futsal',
+                    'Peningkatan Kondisi Fisik & Kebugaran',
+                    'Uji Tanding / Friendly Match',
+                    'Keikutsertaan Turnamen Kabupaten Kediri'
+                ],
+                views: 195,
+                emblemColor: 'from-green-600 to-emerald-800',
+                icon: 'fa-solid fa-futbol',
+                svgEmblem: `
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                        <polygon points="100,15 180,55 180,145 100,185 20,145 20,55" fill="#15803d" stroke="#86efac" stroke-width="5"/>
+                        <circle cx="100" cy="100" r="45" fill="#ffffff"/>
+                        <polygon points="100,75 115,88 110,108 90,108 85,88" fill="#15803d"/>
+                        <text x="100" y="170" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">FUTSAL SPENSAKA</text>
+                    </svg>
+                `,
+                gallery: [
+                    'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=600&q=80'
+                ]
+            },
+            {
+                id: 'english-club',
+                name: 'English Club (Spensaka EC)',
+                category: 'Akademik & Sains',
+                schedule: 'Setiap Kamis Jam 14.00 - 15.30',
+                coach: 'Damara Ilham, S.Pd.',
+                phoneCoach: '62 857-3645-9964',
+                shortDesc: 'Mengembangkan rasa percaya diri dan kemampuan bahasa Inggris siswa melalui Public Speaking, Storytelling, dan Debate.',
+                fullDesc: `English Club SMPN 1 Kandat menyajikan suasana belajar Bahasa Inggris yang menyenangkan (Fun Learning). Siswa dilatih berani berbicara (speaking), mendongeng (storytelling), berpidato (speech), dan berdiskusi interaktif.`,
+                highlights: [
+                    'English Conversation Practice',
+                    'Storytelling & Speech Competition Prep',
+                    'Fun Educational Games & Scrabble',
+                    'Peningkatan Confidence & Vocabulary'
+                ],
+                views: 104,
+                emblemColor: 'from-indigo-600 to-purple-800',
+                icon: 'fa-solid fa-language',
+                svgEmblem: `
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                        <circle cx="100" cy="100" r="80" fill="#4338ca" stroke="#a5b4fc" stroke-width="6"/>
+                        <text x="100" y="95" font-size="38" font-weight="extrabold" fill="#ffffff" text-anchor="middle">ENGLISH</text>
+                        <text x="100" y="125" font-size="20" font-weight="bold" fill="#facc15" text-anchor="middle">CLUB</text>
+                        <text x="100" y="155" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">SPENSAKA</text>
+                    </svg>
+                `,
+                gallery: [
+                    'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80'
+                ]
+            }
+        ];
+
+        // Global State Variables
+        let activeCategory = 'Semua';
+        let searchQuery = '';
+        let currentDetailSlug = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initCategoryFilters();
+            handleRouting();
+            
+            // Listen to browser forward/back buttons via hashchange
+            window.addEventListener('hashchange', handleRouting);
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Filter Categories Configuration
+        const CATEGORIES = ['Semua', 'Olahraga', 'Seni & Budaya', 'Organisasi & Keagamaan', 'Akademik & Sains'];
+
+        function initCategoryFilters() {
+            const container = document.getElementById('category-filters');
+            container.innerHTML = CATEGORIES.map(cat => `
+                <button 
+                    onclick="selectCategory('${cat}')"
+                    class="px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+                        activeCategory === cat 
+                        ? 'bg-brand-700 text-white shadow-sm' 
+                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                    }"
+                    id="cat-btn-${cat.replace(/[^a-zA-Z]/g, '')}"
+                >
+                    ${cat}
+                </button>
+            `).join('');
+        }
+
+        function selectCategory(cat) {
+            activeCategory = cat;
+            initCategoryFilters();
+            filterEkstra();
+        }
+
+        function showAllCards() {
+            activeCategory = 'Semua';
+            searchQuery = '';
+            document.getElementById('search-input').value = '';
+            initCategoryFilters();
+            filterEkstra();
+        }
+
+        function resetFilters() {
+            showAllCards();
+        }
+
+        function filterEkstra() {
+            const input = document.getElementById('search-input');
+            searchQuery = input.value.toLowerCase().trim();
+
+            const filtered = EKSTRA_DATA.filter(item => {
+                const matchesCat = (activeCategory === 'Semua') || (item.category === activeCategory);
+                const matchesSearch = item.name.toLowerCase().includes(searchQuery) || 
+                                      item.shortDesc.toLowerCase().includes(searchQuery) ||
+                                      item.category.toLowerCase().includes(searchQuery);
+                return matchesCat && matchesSearch;
+            });
+
+            renderGrid(filtered);
+        }
+
+        function renderGrid(items) {
+            const grid = document.getElementById('ekstra-grid');
+            const emptyState = document.getElementById('empty-state');
+
+            if (items.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+
+            grid.innerHTML = items.map(item => `
+                <div 
+                    onclick="navigateTo('ekstra/${item.id}')"
+                    class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer group flex flex-col justify-between badge-hover-effect relative overflow-hidden"
+                >
+                    <!-- Accent Color Top Bar -->
+                    <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${item.emblemColor}"></div>
+
+                    <div class="space-y-4">
+                        <!-- Logo Badge & Icon -->
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-slate-50 border border-slate-100 p-2 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            ${item.svgEmblem}
+                        </div>
+
+                        <!-- Title & Schedule -->
+                        <div class="text-center space-y-1">
+                            <h3 class="font-bold text-slate-900 text-lg group-hover:text-brand-600 transition-colors">
+                                ${item.name}
+                            </h3>
+                            <div class="inline-flex items-center gap-1.5 text-xs text-brand-700 font-semibold bg-brand-50 px-2.5 py-1 rounded-lg">
+                                <i class="fa-regular fa-clock text-[10px]"></i>
+                                <span>${item.schedule}</span>
+                            </div>
+                        </div>
+
+                        <!-- Short Description -->
+                        <p class="text-xs text-slate-500 text-center leading-relaxed line-clamp-3">
+                            ${item.shortDesc}
+                        </p>
+                    </div>
+
+                    <!-- Bottom Category Pill -->
+                    <div class="pt-4 mt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+                        <span class="font-medium text-slate-600">${item.category}</span>
+                        <span class="font-semibold text-brand-600 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                            Detail <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                        </span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function navigateTo(route) {
+            window.location.hash = route;
+        }
+
+        function handleRouting() {
+            const hash = window.location.hash.replace('#', '') || 'home';
+
+            const listView = document.getElementById('list-view');
+            const detailView = document.getElementById('detail-view');
+
+            if (hash.startsWith('ekstra/')) {
+                const slug = hash.replace('ekstra/', '');
+                const foundItem = EKSTRA_DATA.find(e => e.id === slug);
+
+                if (foundItem) {
+                    currentDetailSlug = slug;
+                    renderDetailView(foundItem);
+                    listView.classList.add('hidden');
+                    detailView.classList.remove('hidden');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+            }
+
+            // Default fallback to list view
+            listView.classList.remove('hidden');
+            detailView.classList.add('hidden');
+            filterEkstra();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderDetailView(item) {
+            // Update Title and Breadcrumbs
+            document.getElementById('detail-breadcrumb-title').textContent = item.name;
+            document.getElementById('detail-title').textContent = item.name;
+            
+            // Increment view count simulation
+            const storedViews = parseInt(localStorage.getItem(`views_${item.id}`) || item.views);
+            const newViews = storedViews + 1;
+            localStorage.setItem(`views_${item.id}`, newViews);
+            document.getElementById('detail-views').textContent = `${newViews} kali dilihat`;
+
+            // Emblem Frame
+            document.getElementById('detail-emblem-container').innerHTML = item.svgEmblem;
+            document.getElementById('detail-emblem-caption').textContent = `Ekstrakurikuler ${item.name}`;
+
+            // Description Heading & Content
+            document.getElementById('detail-section-heading').innerHTML = `
+                <i class="fa-solid fa-circle-info text-brand-600 text-lg"></i>
+                <span>Mengenal ${item.name}</span>
+            `;
+            document.getElementById('detail-description').innerHTML = `
+                <p>${item.fullDesc}</p>
+                <p class="text-xs text-slate-500 italic mt-2">
+                    Gugus Ekstrakurikuler SMP Negeri 1 Kandat secara aktif mendukung pembentukan minat siswa serta persiapan lomba antarsekolah.
+                </p>
+            `;
+
+            // Highlights / Objectives
+            const highlightsList = document.getElementById('detail-highlights');
+            highlightsList.innerHTML = item.highlights.map(h => `
+                <li class="flex items-start gap-2 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                    <i class="fa-solid fa-circle-check text-emerald-500 text-xs mt-1"></i>
+                    <span>${h}</span>
+                </li>
+            `).join('');
+
+            // Sidebar Details
+            document.getElementById('detail-schedule-text').textContent = item.schedule;
+            document.getElementById('detail-coach').textContent = item.coach;
+
+            // Target Ekstra for Form
+            document.getElementById('form-target-ekstra').value = item.name;
+
+            // Photo Gallery
+            const galleryGrid = document.getElementById('detail-gallery');
+            galleryGrid.innerHTML = item.gallery.map((imgUrl, idx) => `
+                <div class="group relative rounded-xl overflow-hidden aspect-video bg-slate-100 shadow-sm">
+                    <img 
+                        src="${imgUrl}" 
+                        alt="Foto Kegiatan ${item.name} ${idx+1}"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        onerror="this.src='https://placehold.co/600x400/4338ca/ffffff?text=Dokumentasi+Spensaka'"
+                    >
+                    <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="text-white text-xs font-semibold px-2 py-1 rounded bg-black/50">Dokumentasi</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openRegistrationModal() {
+            const modal = document.getElementById('registration-modal');
+            modal.classList.remove('hidden');
+        }
+
+        function closeRegistrationModal() {
+            const modal = document.getElementById('registration-modal');
+            modal.classList.add('hidden');
+        }
+
+        function submitRegistration(event) {
+            event.preventDefault();
+
+            const item = EKSTRA_DATA.find(e => e.id === currentDetailSlug) || EKSTRA_DATA[0];
+            const name = document.getElementById('form-name').value.trim();
+            const studentClass = document.getElementById('form-class').value;
+            const phone = document.getElementById('form-phone').value.trim();
+            const reason = document.getElementById('form-reason').value.trim();
+
+            const textMessage = `Halo Pembina Ekstrakurikuler ${item.name} SMPN 1 Kandat,\n\nSaya ingin mendaftar ekstrakurikuler *${item.name}*:\n- *Nama*: ${name}\n- *Kelas*: ${studentClass}\n- *No HP*: ${phone}\n- *Alasan*: ${reason || '-'}\n\nMohon konfirmasi pendaftaran saya. Terima kasih!`;
+
+            const encodedMessage = encodeURIComponent(textMessage);
+            const waUrl = `https://wa.me/${item.phoneCoach}?text=${encodedMessage}`;
+
+            closeRegistrationModal();
+            document.getElementById('reg-form').reset();
+
+            // Direct to WhatsApp
+            window.open(waUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
